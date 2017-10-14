@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IT Notes</title>
-    <link>http://blog.aborilov.ru/</link>
-    <description>Recent content on IT Notes</description>
+    <title>Posts on IT Notes</title>
+    <link>http://blog.aborilov.ru/post/</link>
+    <description>Recent content in Posts on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 28 Dec 2012 10:44:16 +0300</lastBuildDate>
     
-	<atom:link href="http://blog.aborilov.ru/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://blog.aborilov.ru/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
