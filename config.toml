@@ -5,7 +5,7 @@ copyright = ""
 theme = "minimo"
 
 disqusShortname = "blog-aborilov-ru"
-googleAnalytics = ""
+googleAnalytics = "UA-7387908-2"
 Paginate = 5
 
 preserveTaxonomyNames = true
