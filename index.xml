@@ -5,10 +5,19 @@
     <link>http://blog.aborilov.ru/</link>
     <description>Recent content on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Dec 2012 10:44:16 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2015 16:00:00 +0300</lastBuildDate>
     
 	<atom:link href="http://blog.aborilov.ru/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Переключение между сетевыми профилями NetworkManager через dmenu</title>
+      <link>http://blog.aborilov.ru/post/network_manager_dmenu/</link>
+      <pubDate>Tue, 25 Aug 2015 16:00:00 +0300</pubDate>
+      
+      <guid>http://blog.aborilov.ru/post/network_manager_dmenu/</guid>
+      <description>Для быстрого переключения между профилями NetworkManager через dmenu использую данные скрипт: #!/usr/bin/env python2 import os CHAR = &amp;#34;V &amp;#34; cmd = &amp;#39;nmcli -f name,devices con status|tail -n+2&amp;#39; active_devices = os.popen(cmd).read().split(&amp;#39;\n&amp;#39;) name_dev = {} for name_device in active_devices: if name_device: name, device = name_device.split() name_dev[name] = device all_cons = os.popen(&amp;#39;nmcli -f name con list|tail -n+2&amp;#39;).read().split() active_cons = os.popen(&amp;#39;nmcli -f name con status|tail -n+2&amp;#39;).read().split() selected_list = [CHAR + con if con in active_cons else con for con in all_cons] con = os.</description>
+    </item>
     
     <item>
       <title>Компиляция python кода в exe под Linux</title>
