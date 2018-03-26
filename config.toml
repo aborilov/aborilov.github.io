@@ -42,14 +42,6 @@ hideEntryNavigation = ["page"] # boolean / array of sections
 hideSocialMenu = false
 showReadingTime = true
 
-[params.sidebar]
-enable = true
-sticky = true
-
-[params.widgets]
-homepage = ["recent_posts"]
-sidebar = ["about"]
-
 [params.opengraph.facebook]
 admins = [] # array of Facebook IDs
 appID = ""
@@ -81,10 +73,10 @@ tag = "tags"
 page = "/:slug/"
 
 [[menu.main]]
-name = "Main"
+name = "Posts"
 weight = -10
-identifier = "main"
-url = "https://blog.aborilov.ru"
+identifier = "posts"
+url = "https://blog.aborilov.ru/post"
 
 [blackfriday]
 hrefTargetBlank = true
