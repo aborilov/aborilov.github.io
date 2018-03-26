@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='QTile это tiling оконный менеджер написанный полностью на Python. Основные его плюсы состоят в том что написан на Python и вроде как сейчас активно развивается. Конфиг тоже пишется на Python, поэтому для человека знакомого с данным языком проблем с конфигурацией не должно быть.
+Установить Qtile можно из git репозитория, репозиториев дистрибутивов, с помощью питоновский утилит pip и easy_install, а так же и из исходных кодов.
+Если вы ставили Qtile из репозитория дистрибутива, то на экране login должен быть доступен сеанс Qtile, в него и загружаемся.'>
+
+<meta property='og:title' content='Оконный менеджер Qtile • IT Notes'>
+<meta property='og:description' content='QTile это tiling оконный менеджер написанный полностью на Python. Основные его плюсы состоят в том что написан на Python и вроде как сейчас активно развивается. Конфиг тоже пишется на Python, поэтому для человека знакомого с данным языком проблем с конфигурацией не должно быть.
+Установить Qtile можно из git репозитория, репозиториев дистрибутивов, с помощью питоновский утилит pip и easy_install, а так же и из исходных кодов.
+Если вы ставили Qtile из репозитория дистрибутива, то на экране login должен быть доступен сеанс Qtile, в него и загружаемся.'>
+<meta property='og:url' content='http://blog.aborilov.ru/post/qtile/'>
+<meta property='og:site_name' content='IT Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2014-06-03T14:15:00&#43;03:00'/><meta property='article:modified_time' content='2014-06-03T14:15:00&#43;03:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+  <title>Оконный менеджер Qtile • IT Notes</title>
+  <link rel='canonical' href='http://blog.aborilov.ru/post/qtile/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/assets/css/main.77da63e1.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-7387908-2', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-post'>
+  <div class='site'>
+
+    <a class='screen-reader' href='#main'>Skip to Content</a>
+
+    <header id='header' class='header-container'>
+      <div class='header site-header'>
+        <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
+  <ul class='main-menu'>
+  <li>
+      <a href='http://blog.aborilov.ru'>Main</a>
+    </li>
+  
+  </ul>
+</nav>
+
+        <div class='header-info'>
+          
+          <p class='site-title title'>IT Notes</p>
+          
+          <p class='site-description subtitle'>Aborilov Pavel&#39;s thoughts</p>
+        </div>
+      </div>
+    </header>
+
+
+<main id='main' class='main'>
+  <article lang='en' class='entry'>
+    <header class='header-container'>
+  <div class='header entry-header'>
+    <div class='header-info'>
+      <h1 class='title'>Оконный менеджер Qtile</h1>
+      
+
+    </div>
+    
+<div class='meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader'>Posted on </span>
+  <time class='date' datetime='2014-06-03T14:15:00&#43;03:00'>2014, Jun 03</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+5 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+    
+    
+
+    <div class='entry-content'>
+  <p><a href="http://qtile.org/" target="_blank">QTile</a> это tiling оконный менеджер написанный полностью на <code>Python</code>. Основные его плюсы состоят в том что написан на <code>Python</code> и вроде как сейчас активно развивается. Конфиг тоже пишется на <code>Python</code>, поэтому для человека знакомого с данным языком проблем с конфигурацией не должно быть.<br />
+Установить <code>Qtile</code> можно из <code>git</code> репозитория, репозиториев дистрибутивов, с помощью питоновский утилит <code>pip</code> и <code>easy_install</code>, а так же и из исходных кодов.<br />
+Если вы ставили <code>Qtile</code> из репозитория дистрибутива, то на экране login должен быть доступен сеанс <code>Qtile</code>, в него и загружаемся.<br />
+Пока у вас нету своего конфига, будет работать <a href="https://github.com/qtile/qtile/blob/develop/libqtile/resources/default_config.py" target="_blank">DefaltConfig</a>. Можно сохранить его в <code>~/.config/qtile/config.py</code> и начать править.<br />
+Переключение между рабочими столами происходит по кнопке</p>
+
+<pre><code>CMD+буква+(a, s, d, f, u, i, o, p)
+</code></pre>
+
+<p>Запуск терминала</p>
+
+<pre><code>CMD+Enter
+</code></pre>
+
+<p>Что бы запустить любой приложение, можно нажать <code>CMD+r</code>, появится строка ввода, куда надо вводить имя программы для запуска.</p>
+
+<p>Завершение <code>Qtile</code> по нажатию <code>WinKey+Ctrl+q</code>.</p>
+
+<p>Перезагрузка <code>Qtile</code> по нажатию <code>WinKey+Ctrl+r</code>.(удобно пока экспериментируешь с конфигом)</p>
+
+<p>По сути, это все что вам необходимо для того что бы начать создавать свой конфиг. На сайте разработчика есть небольшая документация, в которой освещены основные моменты настройки. Я описывать тоже самое не будет, просто приведу свой <a href="https://raw.githubusercontent.com/aborilov/code/master/qtile/config/config.py" target="_blank">конфиг</a>.</p>
+
+<p>Разберем не которые детали:</p>
+
+<p>выставляем клавиши
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mod <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mod4&#34;</span>
+alt <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mod1&#34;</span></code></pre></div></p>
+
+<p>Управление музыкой через mpc
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Home&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc toggle&#34;</span>)),
+    Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;End&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc stop&#34;</span>)),
+    Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Page_Down&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc next&#34;</span>)),
+    Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Delete&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc prev&#34;</span>)),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;m&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            mpc playlist | dmenu -l 10  |</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            xargs -I &#39;{}&#39; sh -c &#34;mpc playlist </span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            | grep -rne &#39;{}&#39; | awk -F: &#39;{print \$1}&#39;&#34; </span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            | xargs -I &#39;{}&#39; sh -c &#34;test -n &#39;{}&#39; &amp;amp;&amp;amp; mpc play &#39;{}&#39;&#34;
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>)
+    ),</code></pre></div>
+закрыть текущее окно
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;w&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>kill()
+    ),</code></pre></div>
+поднимаем спрятавшееся окно наружу(grave -&nbsp; это клавиша ~)<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [alt], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;grave&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>bring_to_front()
+    ),</code></pre></div>
+переключение на следующее окно в группе(полезно когда какой-нибудь всплывающее окно ушло за задний фон)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [alt], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Tab&#34;</span>,
+        lazy<span style="color:#f92672">.</span>group<span style="color:#f92672">.</span>next_window()),</code></pre></div>
+Переключение между группами
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Left&#34;</span>,
+        lazy<span style="color:#f92672">.</span>group<span style="color:#f92672">.</span>prevgroup()
+    ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Right&#34;</span>,
+        lazy<span style="color:#f92672">.</span>group<span style="color:#f92672">.</span>nextgroup()
+    ),</code></pre></div>
+переключение между слоями
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;h&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>previous()
+    ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;l&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>next()
+    ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;j&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>up()
+    ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;k&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>down()
+    ),</code></pre></div>
+переключить окно в плавающее(не обходимо для окон работающий не навесь экран, например диалоги)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;f&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>toggle_floating()
+    ),</code></pre></div>
+различные переключения и изменения размеров для разных layout. проще попробовать самому.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;shift&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;space&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>rotate(),
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>flip(),              <span style="color:#75715e"># xmonad-tall</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;shift&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;k&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>shuffle_up(),         <span style="color:#75715e"># Stack, xmonad-tall</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;shift&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;j&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>shuffle_down(),       <span style="color:#75715e"># Stack, xmonad-tall</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;control&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;l&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>add(),                <span style="color:#75715e"># Stack</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>increase_ratio(),     <span style="color:#75715e"># Tile</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>maximize(),           <span style="color:#75715e"># xmonad-tall</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;control&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;h&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>delete(),             <span style="color:#75715e"># Stack</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>decrease_ratio(),     <span style="color:#75715e"># Tile</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>normalize(),          <span style="color:#75715e"># xmonad-tall</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;control&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;k&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>shrink(),             <span style="color:#75715e"># xmonad-tall</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>decrease_nmaster(),   <span style="color:#75715e"># Tile</span>
+        ),
+    Key(
+        [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;control&#34;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;j&#34;</span>,
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>grow(),               <span style="color:#75715e"># xmonad-tall</span>
+        lazy<span style="color:#f92672">.</span>layout<span style="color:#f92672">.</span>increase_nmaster(),   <span style="color:#75715e"># Tile</span>
+        ), </code></pre></div>
+запуск различных программ
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;n&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;firefox&#34;</span>)
+        ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;d&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;subl&#34;</span>)
+        ),
+
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;u&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;uzbl-tabbed&#34;</span>)
+        ),</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Return&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;urxvt&#34;</span>))</code></pre></div>
+переключение на следующий layout
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Tab&#34;</span>,    lazy<span style="color:#f92672">.</span>nextlayout())</code></pre></div>
+запуск приложение через dmenu
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">   Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;space&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;dmenu_run -fn &#39;Terminus:size=8&#39; -nb &#39;#000000&#39; -nf &#39;#fefefe&#39;&#34;</span>)
+    ),</code></pre></div>
+настройка громкости
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;equal&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;amixer -c 0 -q set Master 2dB+&#34;</span>)
+    ),
+    Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;minus&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;amixer -c 0 -q set Master 2dB-&#34;</span>)
+    ),</code></pre></div>
+управление мышкой
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mouse <span style="color:#f92672">=</span> [
+    Drag(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Button1&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>set_position_floating(),
+        start<span style="color:#f92672">=</span>lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_position()
+    ),
+    Drag(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Button3&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>set_size_floating(),
+        start<span style="color:#f92672">=</span>lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_size()
+    ),
+    Click(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Button2&#34;</span>,
+        lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>bring_to_front()
+    ),
+]</code></pre></div>
+задаем рабочие столы. У меня это клавиши от 1 до 0. Для переключение нажимаем клавишу <code>mod</code> + номер. Для переноса окна на другой стол, <code>mod+shift+номер</code><br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">groups <span style="color:#f92672">=</span> [Group(str(i)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">0</span>)]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> groups:
+    keys<span style="color:#f92672">.</span>append(Key([mod], i<span style="color:#f92672">.</span>name, lazy<span style="color:#f92672">.</span>group[i<span style="color:#f92672">.</span>name]<span style="color:#f92672">.</span>toscreen()))
+    keys<span style="color:#f92672">.</span>append(
+        Key(
+            [mod, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;shift&#34;</span>], i<span style="color:#f92672">.</span>name, lazy<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>togroup(i<span style="color:#f92672">.</span>name),
+            lazy<span style="color:#f92672">.</span>group[i<span style="color:#f92672">.</span>name]<span style="color:#f92672">.</span>toscreen()))</code></pre></div>
+настраиваем border для окон
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">border <span style="color:#f92672">=</span> dict(
+    border_normal<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;#808080&#39;</span>,
+    border_width<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+)</code></pre></div>
+задаем какие будем использоваться layouts. <a href="http://docs.qtile.org/en/latest/manual/ref/layouts.html" target="_blank">Здесь</a> можно почитать про встроенные <code>layouts</code>, но документация как всегда не успевает за разработчиками, так что лучше все посмотреть в <a href="https://github.com/qtile/qtile/tree/develop/libqtile/layout" target="_blank">git</a>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">layouts <span style="color:#f92672">=</span> [
+    layout<span style="color:#f92672">.</span>Max(),
+    layout<span style="color:#f92672">.</span>MonadTall(<span style="color:#f92672">**</span>border),
+    layout<span style="color:#f92672">.</span>Matrix(<span style="color:#f92672">**</span>border)
+]</code></pre></div>
+теперь задаем наш экран. у меня один монитор, поэтому screen один. Можно настраивать поведение при нескольких мониторах. В нашем мониторе создаем <code>Bar</code> и задаем что на необходимо там видеть. Опять же, вот <a href="http://docs.qtile.org/en/latest/manual/ref/widgets.html" target="_blank">тут</a> про встроенные виджеты или <a href="https://github.com/qtile/qtile/tree/develop/libqtile/widget" target="_blank">тут</a> в исходных кодах.<br />
+В вкратце, у меня используется <code>GroupBox</code> - отображает рабочие столы, <code>WindowName</code> - отображает заголовок текущего окна, <code>Notify</code> - типа статусной строки, <code>Systray</code> - системный трай, <code>KeyboardLayout</code> - раскладка клавиатуры, <code>Volume</code> - громкость, <code>BitcoinTicker</code> - все ясно, и часы. У каждого виджета есть свои настройки, более подробно в исходнике виджета.<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">screens <span style="color:#f92672">=</span> [
+    Screen(
+        top<span style="color:#f92672">=</span>bar<span style="color:#f92672">.</span>Bar(
+            [
+                widget<span style="color:#f92672">.</span>GroupBox(margin_y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+                                margin_x<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+                                borderwidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+                                padding<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,),
+                widget<span style="color:#f92672">.</span>WindowName(foreground<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;a0a0a0&#34;</span>,),
+                widget<span style="color:#f92672">.</span>Notify(),
+                widget<span style="color:#f92672">.</span>Systray(),
+                widget<span style="color:#f92672">.</span>KeyboardLayout(configured_keyboards<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;us&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;ru&#34;</span>]),
+                widget<span style="color:#f92672">.</span>Volume(foreground<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;70ff70&#34;</span>,),
+                widget<span style="color:#f92672">.</span>BitcoinTicker(currency<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;rub&#34;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;{buy}&#34;</span>),
+                widget<span style="color:#f92672">.</span>Clock(foreground<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;a0a0a0&#34;</span>,
+                             fmt<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;%H:%M </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">.%m.%Y&#34;</span>,),
+            ],
+            <span style="color:#ae81ff">18</span>,
+        ),
+    ),
+]</code></pre></div>
+эти хуки необходимы для того что бы некоторые всплывающие окна и диалоги автоматом переключались в режим <code>floating</code> и не открывались во весь экран<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@hook.subscribe.client_new</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dialogs</span>(window):
+    <span style="color:#66d9ef">if</span> (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_type() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;dialog&#39;</span>
+            <span style="color:#f92672">or</span> window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_transient_for()):
+        window<span style="color:#f92672">.</span>floating <span style="color:#f92672">=</span> True
+
+
+<span style="color:#a6e22e">@hook.subscribe.client_new</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vue_tools</span>(window):
+    <span style="color:#66d9ef">if</span>((window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_class() <span style="color:#f92672">==</span> (
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;sun-awt-X11-XWindowPeer&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tufts-vue-VUE&#39;</span>)
+            <span style="color:#f92672">and</span> window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_hints()[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;window_group&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+            <span style="color:#f92672">or</span> (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_class() <span style="color:#f92672">==</span> (
+                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;sun-awt-X11-XDialogPeer&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tufts-vue-VUE&#39;</span>))):
+        window<span style="color:#f92672">.</span>floating <span style="color:#f92672">=</span> True
+
+
+<span style="color:#a6e22e">@hook.subscribe.client_new</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">idle_dialogues</span>(window):
+    <span style="color:#66d9ef">if</span>((window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_name() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Search Dialog&#39;</span>) <span style="color:#f92672">or</span>
+      (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_name() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Module&#39;</span>) <span style="color:#f92672">or</span>
+      (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_name() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Goto&#39;</span>) <span style="color:#f92672">or</span>
+      (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_name() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;IDLE Preferences&#39;</span>)):
+        window<span style="color:#f92672">.</span>floating <span style="color:#f92672">=</span> True
+
+
+<span style="color:#a6e22e">@hook.subscribe.client_new</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">libreoffice_dialogues</span>(window):
+    <span style="color:#66d9ef">if</span> ((window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_class() <span style="color:#f92672">==</span> (
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;VCLSalFrame&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;libreoffice-calc&#39;</span>)) <span style="color:#f92672">or</span>
+            (window<span style="color:#f92672">.</span>window<span style="color:#f92672">.</span>get_wm_class() <span style="color:#f92672">==</span> (
+                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;VCLSalFrame&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;LibreOffice 3.4&#39;</span>))):
+        window<span style="color:#f92672">.</span>floating <span style="color:#f92672">=</span> True</code></pre></div>
+а здесь мы создаем метод для запуск программ и описываем программы которые необходимо запускать при старте <code>qtile</code><br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_running</span>(process):
+    s <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>Popen([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;ps&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;axw&#34;</span>], stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE)
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> s<span style="color:#f92672">.</span>stdout:
+        <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search(process, x):
+            <span style="color:#66d9ef">return</span> True
+    <span style="color:#66d9ef">return</span> False
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_once</span>(process):
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_running(process):
+        <span style="color:#66d9ef">return</span> subprocess<span style="color:#f92672">.</span>Popen(process<span style="color:#f92672">.</span>split())
+
+
+<span style="color:#a6e22e">@hook.subscribe.startup</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">startup</span>():
+    execute_once(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;nm-applet&#34;</span>)
+    execute_once(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;synergy&#34;</span>)
+    execute_once(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;feh --bg-fill /home/pavel/Pictures/arch.png&#34;</span>)
+    execute_once(
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;setxkbmap -layout us,ru -option grp:caps_toggle,grp_led:scroll&#39;</span>)</code></pre></div></p>
+
+</div>
+
+    
+<footer class='entry-footer-container'>
+  <div class='entry-footer'>
+  
+  </div>
+</footer>
+
+
+  </article>
+  
+<nav class='entry-nav-container'>
+  <div class='entry-nav'><div class='prev-entry'>
+      <a href='/post/python2exe/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span>Компиляция python кода в exe под Linux</a>
+    </div><div class='next-entry'>
+      <a href='/post/mopidy/'>
+        <span class='screen-reader'>Next post: </span>Плеер mopidy<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+  
+<div class='comments-container'>
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-aborilov-ru" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social-menu-container'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'><li>
+        <a href='https://github.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/pavel.aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:pavel@aborilov.ru' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/pavel-aborilov-19772bb0' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</div>
+        <div class='copyright'>
+  <p>
+        
+          
+        
+      
+
+       &copy; 2017-2018 Aborilov Pavel 
+  </p>
+</div>
+
+      </div>
+    </footer>
+
+  </div><script src='/assets/js/main.f29c93b9.js'></script><script src='/js/custom.js'></script></body>
+
+</html>
+

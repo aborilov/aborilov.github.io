@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Я так и не смог найти нормального способа получить текущую раскладку клавиатуры из командрой строки. В интернете много разный примеров, но ни один у меня не выдал нужного результата(система Ubuntu 12.04). Единственное что дает хоть какой-то результат:
+xset -q  на выходе получаем
+Keyboard Control: auto repeat: on key click percent: 0 LED mask: 00000002 XKB indicators: 00: Caps Lock: off 01: Num Lock: on 02: Scroll Lock: off 03: Compose: off 04: Kana: off 05: Sleep: off 06: Suspend: off 07: Mute: off 08: Misc: off 09: Mail: off 10: Charging: off 11: Shift Lock: off 12: Group 2: off 13: Mouse Keys: off auto repeat delay: 500 repeat rate: 33 auto repeating keys: 00ffffffdffffbbf fadfffefffedffff 9fffffffffffffff fff7ffffffffffff bell percent: 50 bell pitch: 400 bell duration: 100 Pointer Control: acceleration: 2/1 threshold: 4 Screen Saver: prefer blanking: yes allow exposures: yes timeout: 600 cycle: 600 Colors: default colormap: 0x20 BlackPixel: 0 WhitePixel: 16777215 Font Path: /usr/share/fonts/X11/misc,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,/var/lib/defoma/x-ttcidfont-conf.'>
+
+<meta property='og:title' content='Получение текущей раскладки клавиатуры в python • IT Notes'>
+<meta property='og:description' content='Я так и не смог найти нормального способа получить текущую раскладку клавиатуры из командрой строки. В интернете много разный примеров, но ни один у меня не выдал нужного результата(система Ubuntu 12.04). Единственное что дает хоть какой-то результат:
+xset -q  на выходе получаем
+Keyboard Control: auto repeat: on key click percent: 0 LED mask: 00000002 XKB indicators: 00: Caps Lock: off 01: Num Lock: on 02: Scroll Lock: off 03: Compose: off 04: Kana: off 05: Sleep: off 06: Suspend: off 07: Mute: off 08: Misc: off 09: Mail: off 10: Charging: off 11: Shift Lock: off 12: Group 2: off 13: Mouse Keys: off auto repeat delay: 500 repeat rate: 33 auto repeating keys: 00ffffffdffffbbf fadfffefffedffff 9fffffffffffffff fff7ffffffffffff bell percent: 50 bell pitch: 400 bell duration: 100 Pointer Control: acceleration: 2/1 threshold: 4 Screen Saver: prefer blanking: yes allow exposures: yes timeout: 600 cycle: 600 Colors: default colormap: 0x20 BlackPixel: 0 WhitePixel: 16777215 Font Path: /usr/share/fonts/X11/misc,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,/var/lib/defoma/x-ttcidfont-conf.'>
+<meta property='og:url' content='http://blog.aborilov.ru/post/keyboard_layout_python/'>
+<meta property='og:site_name' content='IT Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2012-09-26T16:00:00&#43;03:00'/><meta property='article:modified_time' content='2012-09-26T16:00:00&#43;03:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+  <title>Получение текущей раскладки клавиатуры в python • IT Notes</title>
+  <link rel='canonical' href='http://blog.aborilov.ru/post/keyboard_layout_python/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/assets/css/main.77da63e1.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-7387908-2', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-post'>
+  <div class='site'>
+
+    <a class='screen-reader' href='#main'>Skip to Content</a>
+
+    <header id='header' class='header-container'>
+      <div class='header site-header'>
+        <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
+  <ul class='main-menu'>
+  <li>
+      <a href='http://blog.aborilov.ru'>Main</a>
+    </li>
+  
+  </ul>
+</nav>
+
+        <div class='header-info'>
+          
+          <p class='site-title title'>IT Notes</p>
+          
+          <p class='site-description subtitle'>Aborilov Pavel&#39;s thoughts</p>
+        </div>
+      </div>
+    </header>
+
+
+<main id='main' class='main'>
+  <article lang='en' class='entry'>
+    <header class='header-container'>
+  <div class='header entry-header'>
+    <div class='header-info'>
+      <h1 class='title'>Получение текущей раскладки клавиатуры в python</h1>
+      
+
+    </div>
+    
+<div class='meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader'>Posted on </span>
+  <time class='date' datetime='2012-09-26T16:00:00&#43;03:00'>2012, Sep 26</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+    
+    
+
+    <div class='entry-content'>
+  <p>Я так и не смог найти нормального способа получить текущую раскладку клавиатуры из командрой строки. В интернете много разный примеров, но ни один у меня не выдал нужного результата(система Ubuntu 12.04). Единственное что дает хоть какой-то результат:</p>
+
+<pre><code>xset -q
+</code></pre>
+
+<p>на выходе получаем</p>
+
+<pre><code>Keyboard Control:  
+  auto repeat: on  key click percent: 0  LED mask: 00000002  
+  XKB indicators:  
+   00: Caps Lock:  off  01: Num Lock:  on   02: Scroll Lock: off  
+   03: Compose:   off  04: Kana:    off  05: Sleep:    off  
+   06: Suspend:   off  07: Mute:    off  08: Misc:    off  
+   09: Mail:    off  10: Charging:  off  11: Shift Lock: off  
+   12: Group 2:   off  13: Mouse Keys: off  
+  auto repeat delay: 500  repeat rate: 33  
+  auto repeating keys: 00ffffffdffffbbf  
+             fadfffefffedffff  
+             9fffffffffffffff  
+             fff7ffffffffffff  
+  bell percent: 50  bell pitch: 400  bell duration: 100  
+ Pointer Control:  
+  acceleration: 2/1  threshold: 4  
+ Screen Saver:  
+  prefer blanking: yes  allow exposures: yes  
+  timeout: 600  cycle: 600  
+ Colors:  
+  default colormap: 0x20  BlackPixel: 0  WhitePixel: 16777215  
+ Font Path:  
+  /usr/share/fonts/X11/misc,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,/var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType,built-ins  
+ DPMS (Energy Star):  
+  Standby: 0  Suspend: 0  Off: 0  
+  DPMS is Enabled  
+  Monitor is On  
+</code></pre>
+
+<p>Для нас важна вторая строка, а конкретно</p>
+
+<pre><code>LED mask: 00000002  
+</code></pre>
+
+<p>если мы переключим раскладку с default на другую то получим</p>
+
+<pre><code>LED mask: 00001002
+</code></pre>
+
+<p>вот у все что у нас есть. Если у вас больше двух раскладок, то вы не узнаете какая у вас сейчас. Данным способом мы можем узнать только дефолтная раскладка сейчас или нет. Что на самом деле достаточно для большенства.<br />
+В <code>bash</code> можно использовать в таком виде</p>
+
+<pre><code>xset -q | grep LED | awk '{print $10}' | cut -c 5  
+</code></pre>
+
+<p>возвращает 0 при дефолтной раскладке и 1 при альтернативной.<br />
+Но мне раскладка клавиатуры нужна в <code>Python</code>.<br />
+Для получения группы раскладок в <code>Python</code> мы можем использовать следующий код:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+
+<span style="color:#f92672">import</span> os
+
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GI_TYPELIB_PATH&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;libxklavier:&#39;</span> <span style="color:#f92672">+</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GI_TYPELIB_PATH&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;</span>)
+
+<span style="color:#f92672">from</span> gi.repository <span style="color:#f92672">import</span> Xkl, Gdk, GdkX11
+
+display <span style="color:#f92672">=</span> GdkX11<span style="color:#f92672">.</span>x11_get_default_xdisplay()
+
+engine <span style="color:#f92672">=</span> Xkl<span style="color:#f92672">.</span>Engine<span style="color:#f92672">.</span>get_instance(display)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;group names:&#39;</span>, engine<span style="color:#f92672">.</span>get_groups_names())</code></pre></div>
+Теперь имея список раскладок, мы можем поставить в соответствие значение получаемое из</p>
+
+<pre><code>xset -q  
+</code></pre>
+
+<p>с раскладкой из группы <code>engine.get_groups_names()</code></p>
+
+<p>в итоге получился такой не большой класс:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> subprocess
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GI_TYPELIB_PATH&#39;</span>] <span style="color:#f92672">=</span>\
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;libxklavier:&#39;</span> <span style="color:#f92672">+</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GI_TYPELIB_PATH&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;</span>)
+
+<span style="color:#f92672">from</span> gi.repository <span style="color:#f92672">import</span> Xkl, Gdk, GdkX11
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">kb</span>():
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        display <span style="color:#f92672">=</span> GdkX11<span style="color:#f92672">.</span>x11_get_default_xdisplay()
+        self<span style="color:#f92672">.</span>engine <span style="color:#f92672">=</span> Xkl<span style="color:#f92672">.</span>Engine<span style="color:#f92672">.</span>get_instance(display)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">curkb</span>(self):
+        t <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>check_output([<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;xset&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;-q&#34;</span>])
+        num <span style="color:#f92672">=</span> int(t<span style="color:#f92672">.</span>splitlines()[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split()[<span style="color:#ae81ff">9</span>][<span style="color:#ae81ff">4</span>])
+        groups <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>engine<span style="color:#f92672">.</span>get_groups_names()
+        <span style="color:#66d9ef">if</span> (len(groups) <span style="color:#f92672">&amp;</span>gt; num):
+            <span style="color:#66d9ef">return</span> str(groups[int(num)])[:<span style="color:#ae81ff">2</span>]
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Err&#34;</span></code></pre></div></p>
+
+</div>
+
+    
+<footer class='entry-footer-container'>
+  <div class='entry-footer'>
+  
+  </div>
+</footer>
+
+
+  </article>
+  
+<nav class='entry-nav-container'>
+  <div class='entry-nav'><div class='next-entry'>
+      <a href='/post/python2exe/'>
+        <span class='screen-reader'>Next post: </span>Компиляция python кода в exe под Linux<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+  
+<div class='comments-container'>
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-aborilov-ru" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social-menu-container'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'><li>
+        <a href='https://github.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/pavel.aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:pavel@aborilov.ru' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/pavel-aborilov-19772bb0' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</div>
+        <div class='copyright'>
+  <p>
+        
+          
+        
+      
+
+       &copy; 2017-2018 Aborilov Pavel 
+  </p>
+</div>
+
+      </div>
+    </footer>
+
+  </div><script src='/assets/js/main.f29c93b9.js'></script><script src='/js/custom.js'></script></body>
+
+</html>
+
