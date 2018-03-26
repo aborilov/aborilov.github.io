@@ -1,4 +1,4 @@
-baseURL = "http://blog.aborilov.ru"
+baseURL = "https://blog.aborilov.ru"
 title = "IT Notes"
 copyright = ""
 
@@ -42,6 +42,14 @@ hideEntryNavigation = ["page"] # boolean / array of sections
 hideSocialMenu = false
 showReadingTime = true
 
+[params.sidebar]
+enable = true
+sticky = true
+
+[params.widgets]
+homepage = ["recent_posts"]
+sidebar = ["about"]
+
 [params.opengraph.facebook]
 admins = [] # array of Facebook IDs
 appID = ""
@@ -76,7 +84,7 @@ page = "/:slug/"
 name = "Main"
 weight = -10
 identifier = "main"
-url = "http://blog.aborilov.ru"
+url = "https://blog.aborilov.ru"
 
 [blackfriday]
 hrefTargetBlank = true
