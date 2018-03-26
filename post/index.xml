@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on IT Notes</title>
-    <link>http://blog.aborilov.ru/post/</link>
+    <link>https://blog.aborilov.ru/post/</link>
     <description>Recent content in Posts on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 25 Aug 2015 16:00:00 +0300</lastBuildDate>
     
-	<atom:link href="http://blog.aborilov.ru/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.aborilov.ru/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Переключение между сетевыми профилями NetworkManager через dmenu</title>
-      <link>http://blog.aborilov.ru/post/network_manager_dmenu/</link>
+      <link>https://blog.aborilov.ru/post/network_manager_dmenu/</link>
       <pubDate>Tue, 25 Aug 2015 16:00:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/network_manager_dmenu/</guid>
+      <guid>https://blog.aborilov.ru/post/network_manager_dmenu/</guid>
       <description>Для быстрого переключения между профилями NetworkManager через dmenu использую данные скрипт: #!/usr/bin/env python2 import os CHAR = &amp;#34;V &amp;#34; cmd = &amp;#39;nmcli -f name,devices con status|tail -n+2&amp;#39; active_devices = os.popen(cmd).read().split(&amp;#39;\n&amp;#39;) name_dev = {} for name_device in active_devices: if name_device: name, device = name_device.split() name_dev[name] = device all_cons = os.popen(&amp;#39;nmcli -f name con list|tail -n+2&amp;#39;).read().split() active_cons = os.popen(&amp;#39;nmcli -f name con status|tail -n+2&amp;#39;).read().split() selected_list = [CHAR + con if con in active_cons else con for con in all_cons] con = os.</description>
     </item>
     
     <item>
       <title>Выбор и создание сессий tmux</title>
-      <link>http://blog.aborilov.ru/post/choose_tmux/</link>
+      <link>https://blog.aborilov.ru/post/choose_tmux/</link>
       <pubDate>Wed, 17 Jun 2015 14:15:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/choose_tmux/</guid>
+      <guid>https://blog.aborilov.ru/post/choose_tmux/</guid>
       <description>С помощью этой команды можно подключиться к уже существующей сессии tmux или создать новую сессию с заданным именем. sh -c &amp;#34;tmux ls -f &amp;#39;#{session_name}&amp;#39; | dmenu -l 7 | xargs -i{} urxvtcd -e sh -c &amp;#39;tmux attach -t {} || tmux new -s {}&amp;#39;&amp;#34;
 Выполнение данной команды можно повесить на комбинацию клавишь. Для работы необходимо приложение dmenu. Терминал можно заменить на любой другой.</description>
     </item>
     
     <item>
       <title>Сравнение производительности vim, gvim и neovim</title>
-      <link>http://blog.aborilov.ru/post/vim_gvim_neovim/</link>
+      <link>https://blog.aborilov.ru/post/vim_gvim_neovim/</link>
       <pubDate>Wed, 22 Apr 2015 15:00:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/vim_gvim_neovim/</guid>
+      <guid>https://blog.aborilov.ru/post/vim_gvim_neovim/</guid>
       <description>Появилась задача проализировать 1.5млн строк логов, конечно vim в этом очень помог, но запуск макросов на таком количестве строк занимал ощутимое время и поэтому возник вопрос оптимизации.
 Написав простой макрос и запустив его на 1000 строк я получил следующие результаты:
 gvim на 15% медленее vim, а nvim на 25% быстрее vim.</description>
@@ -42,10 +42,10 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
     
     <item>
       <title>Плеер mopidy</title>
-      <link>http://blog.aborilov.ru/post/mopidy/</link>
+      <link>https://blog.aborilov.ru/post/mopidy/</link>
       <pubDate>Tue, 03 Jun 2014 15:00:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/mopidy/</guid>
+      <guid>https://blog.aborilov.ru/post/mopidy/</guid>
       <description>Плеер Mopidy оказался для меня открытием. Плеер может работать как сервер MPD. Управляться клиентом MPD. Проигрывать как локальный контент, так и с SoundCloud, GooglePlay Music, TuneIn &amp;hellip; etc.
 Если запускаем плеер как сервис, то конфиг лежит в /etc/mopidy/mopidy.conf
 [logging] config_file = /etc/mopidy/logging.conf debug_file = /var/log/mopidy/mopidy-debug.log [local] enabled = true data_dir = /var/lib/mopidy/local media_dir = /var/lib/mopidy/media playlists_dir = /var/lib/mopidy/playlists [soundcloud] enabled = true explore_songs = 25 auth_token = #### [tunein] timeout = 5000 [mpd] enabled = true hostname = 127.</description>
@@ -53,10 +53,10 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
     
     <item>
       <title>Оконный менеджер Qtile</title>
-      <link>http://blog.aborilov.ru/post/qtile/</link>
+      <link>https://blog.aborilov.ru/post/qtile/</link>
       <pubDate>Tue, 03 Jun 2014 14:15:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/qtile/</guid>
+      <guid>https://blog.aborilov.ru/post/qtile/</guid>
       <description>QTile это tiling оконный менеджер написанный полностью на Python. Основные его плюсы состоят в том что написан на Python и вроде как сейчас активно развивается. Конфиг тоже пишется на Python, поэтому для человека знакомого с данным языком проблем с конфигурацией не должно быть.
 Установить Qtile можно из git репозитория, репозиториев дистрибутивов, с помощью питоновский утилит pip и easy_install, а так же и из исходных кодов.
 Если вы ставили Qtile из репозитория дистрибутива, то на экране login должен быть доступен сеанс Qtile, в него и загружаемся.</description>
@@ -64,10 +64,10 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
     
     <item>
       <title>Компиляция python кода в exe под Linux</title>
-      <link>http://blog.aborilov.ru/post/python2exe/</link>
+      <link>https://blog.aborilov.ru/post/python2exe/</link>
       <pubDate>Fri, 28 Dec 2012 10:44:16 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/python2exe/</guid>
+      <guid>https://blog.aborilov.ru/post/python2exe/</guid>
       <description>Если на linux машинах python установлен повсеместно, то windows все наоборот. Решил скомпилировать свое приложения в exe, причем желательно что бы это был одинокий exe файл и не тянул с собой дополнительные dll библиотеки.
 Для компиляции python кода в бинарные файлы есть очень удобная программа pyinstaller.
 Поддержку cross компиляции они уже начали добавлять, но пока она работает не полноценно, поэтому я решил установить python под wine.
@@ -76,10 +76,10 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
     
     <item>
       <title>Получение текущей раскладки клавиатуры в python</title>
-      <link>http://blog.aborilov.ru/post/keyboard_layout_python/</link>
+      <link>https://blog.aborilov.ru/post/keyboard_layout_python/</link>
       <pubDate>Wed, 26 Sep 2012 16:00:00 +0300</pubDate>
       
-      <guid>http://blog.aborilov.ru/post/keyboard_layout_python/</guid>
+      <guid>https://blog.aborilov.ru/post/keyboard_layout_python/</guid>
       <description>Я так и не смог найти нормального способа получить текущую раскладку клавиатуры из командрой строки. В интернете много разный примеров, но ни один у меня не выдал нужного результата(система Ubuntu 12.04). Единственное что дает хоть какой-то результат:
 xset -q  на выходе получаем
 Keyboard Control: auto repeat: on key click percent: 0 LED mask: 00000002 XKB indicators: 00: Caps Lock: off 01: Num Lock: on 02: Scroll Lock: off 03: Compose: off 04: Kana: off 05: Sleep: off 06: Suspend: off 07: Mute: off 08: Misc: off 09: Mail: off 10: Charging: off 11: Shift Lock: off 12: Group 2: off 13: Mouse Keys: off auto repeat delay: 500 repeat rate: 33 auto repeating keys: 00ffffffdffffbbf fadfffefffedffff 9fffffffffffffff fff7ffffffffffff bell percent: 50 bell pitch: 400 bell duration: 100 Pointer Control: acceleration: 2/1 threshold: 4 Screen Saver: prefer blanking: yes allow exposures: yes timeout: 600 cycle: 600 Colors: default colormap: 0x20 BlackPixel: 0 WhitePixel: 16777215 Font Path: /usr/share/fonts/X11/misc,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,/var/lib/defoma/x-ttcidfont-conf.</description>

@@ -8,14 +8,14 @@
 
 <meta property='og:title' content='Переключение между сетевыми профилями NetworkManager через dmenu • IT Notes'>
 <meta property='og:description' content='Для быстрого переключения между профилями NetworkManager через dmenu использую данные скрипт: #!/usr/bin/env python2 import os CHAR = &#34;V &#34; cmd = &#39;nmcli -f name,devices con status|tail -n&#43;2&#39; active_devices = os.popen(cmd).read().split(&#39;\n&#39;) name_dev = {} for name_device in active_devices: if name_device: name, device = name_device.split() name_dev[name] = device all_cons = os.popen(&#39;nmcli -f name con list|tail -n&#43;2&#39;).read().split() active_cons = os.popen(&#39;nmcli -f name con status|tail -n&#43;2&#39;).read().split() selected_list = [CHAR &#43; con if con in active_cons else con for con in all_cons] con = os.'>
-<meta property='og:url' content='http://blog.aborilov.ru/post/network_manager_dmenu/'>
+<meta property='og:url' content='https://blog.aborilov.ru/post/network_manager_dmenu/'>
 <meta property='og:site_name' content='IT Notes'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2015-08-25T16:00:00&#43;03:00'/><meta property='article:modified_time' content='2015-08-25T16:00:00&#43;03:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.37.1" />
 
   <title>Переключение между сетевыми профилями NetworkManager через dmenu • IT Notes</title>
-  <link rel='canonical' href='http://blog.aborilov.ru/post/network_manager_dmenu/'>
+  <link rel='canonical' href='https://blog.aborilov.ru/post/network_manager_dmenu/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -41,7 +41,7 @@ ga('send', 'pageview');
         <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
   <ul class='main-menu'>
   <li>
-      <a href='http://blog.aborilov.ru'>Main</a>
+      <a href='https://blog.aborilov.ru'>Main</a>
     </li>
   
   </ul>
@@ -235,7 +235,7 @@ con <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>p
         
       
 
-       &copy; 2017-2018 Aborilov Pavel 
+       &copy; 2008-2018 Aborilov Pavel 
   </p>
 </div>
 
