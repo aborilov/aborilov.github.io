@@ -63,6 +63,17 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
     </item>
     
     <item>
+      <title>Переключение трека в mpd через dmenu и mpc</title>
+      <link>https://blog.aborilov.ru/post/mpd_track/</link>
+      <pubDate>Thu, 06 Mar 2014 16:00:00 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/mpd_track/</guid>
+      <description>Если вы пользуетесь MPD и не хотите постоянно держать запущенным какой-нибудь клиент, типа Sonata, для переключения треков, то можно повесить на hotkey вот такой простой скрипт
+mpc playlist | dmenu -l 10 | xargs -I &#39;{}&#39; sh -c &amp;quot;mpc playlist | grep -rne &#39;{}&#39; | awk -F: &#39;{print \$1}&#39;&amp;quot; | xargs -I &#39;{}&#39; sh -c &amp;quot;test -n &#39;{}&#39;&amp;amp;amp;&amp;amp;amp; mpc play &#39;{}&#39;&amp;quot;  получаем текущей playlist
+mpc playlist  и выводим его с помощью dmenu(вертикально, 10 строчек)</description>
+    </item>
+    
+    <item>
       <title>Компиляция python кода в exe под Linux</title>
       <link>https://blog.aborilov.ru/post/python2exe/</link>
       <pubDate>Fri, 28 Dec 2012 10:44:16 +0300</pubDate>
@@ -72,6 +83,26 @@ gvim на 15% медленее vim, а nvim на 25% быстрее vim.</descri
 Для компиляции python кода в бинарные файлы есть очень удобная программа pyinstaller.
 Поддержку cross компиляции они уже начали добавлять, но пока она работает не полноценно, поэтому я решил установить python под wine.
 Устанавливаем wine. Качаем python.</description>
+    </item>
+    
+    <item>
+      <title>Не показывать preview для больших архивов в ranger</title>
+      <link>https://blog.aborilov.ru/post/range_large_preview/</link>
+      <pubDate>Thu, 08 Nov 2012 16:00:00 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/range_large_preview/</guid>
+      <description>После того как я начал использовать ranger, мне понравилось что он быстро показывает превью для файлов, картинок, архивов. Но вот с архивами была проблема, когда просто перемещаешься по директории и натыкаешься на большой архив, ranger начинает его разархивировать, что бы получить список файлов и пока он не закончит, нельзя перемещаться дальше. Поэтому первое что пришло в голову, заставить ranger не показывать превью для архивов больше определенного размера. Как сделать это штатными средствами я не нашел.</description>
+    </item>
+    
+    <item>
+      <title>Виджет раскладки клавиатуры в QTile</title>
+      <link>https://blog.aborilov.ru/post/widget_layout/</link>
+      <pubDate>Wed, 26 Sep 2012 16:00:00 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/widget_layout/</guid>
+      <description>В Qtile мне очень не хватало аплета отображающего текущую раскладку клавиатуры и поэтому я решил озадачиться этим вопросам. В прошлой статье я описал как получить текущую раскладку клавиатуры в Python, теперь осталось прикрутить это к qtile. Что оказалось совсем не сложно сделать. За основу я взял виджет часов, который является TextBox&amp;rsquo;ом. Весь Qtile у меня находить в директории
+/usr/local/lib/python2.7/dist-packages/libqtile/  виджеты во вложеной директории widget
+Класс виджета часов выглядит следующим образом: import datetime from .</description>
     </item>
     
     <item>

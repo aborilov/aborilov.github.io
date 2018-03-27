@@ -4,24 +4,22 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Если на linux машинах python установлен повсеместно, то windows все наоборот. Решил скомпилировать свое приложения в exe, причем желательно что бы это был одинокий exe файл и не тянул с собой дополнительные dll библиотеки.
-Для компиляции python кода в бинарные файлы есть очень удобная программа pyinstaller.
-Поддержку cross компиляции они уже начали добавлять, но пока она работает не полноценно, поэтому я решил установить python под wine.
-Устанавливаем wine. Качаем python.'>
+<meta name='description' content='Если вы пользуетесь MPD и не хотите постоянно держать запущенным какой-нибудь клиент, типа Sonata, для переключения треков, то можно повесить на hotkey вот такой простой скрипт
+mpc playlist | dmenu -l 10 | xargs -I &#39;{}&#39; sh -c &quot;mpc playlist | grep -rne &#39;{}&#39; | awk -F: &#39;{print \$1}&#39;&quot; | xargs -I &#39;{}&#39; sh -c &quot;test -n &#39;{}&#39;&amp;amp;&amp;amp; mpc play &#39;{}&#39;&quot;  получаем текущей playlist
+mpc playlist  и выводим его с помощью dmenu(вертикально, 10 строчек)'>
 
-<meta property='og:title' content='Компиляция python кода в exe под Linux • IT Notes'>
-<meta property='og:description' content='Если на linux машинах python установлен повсеместно, то windows все наоборот. Решил скомпилировать свое приложения в exe, причем желательно что бы это был одинокий exe файл и не тянул с собой дополнительные dll библиотеки.
-Для компиляции python кода в бинарные файлы есть очень удобная программа pyinstaller.
-Поддержку cross компиляции они уже начали добавлять, но пока она работает не полноценно, поэтому я решил установить python под wine.
-Устанавливаем wine. Качаем python.'>
-<meta property='og:url' content='https://blog.aborilov.ru/post/python2exe/'>
+<meta property='og:title' content='Переключение трека в mpd через dmenu и mpc • IT Notes'>
+<meta property='og:description' content='Если вы пользуетесь MPD и не хотите постоянно держать запущенным какой-нибудь клиент, типа Sonata, для переключения треков, то можно повесить на hotkey вот такой простой скрипт
+mpc playlist | dmenu -l 10 | xargs -I &#39;{}&#39; sh -c &quot;mpc playlist | grep -rne &#39;{}&#39; | awk -F: &#39;{print \$1}&#39;&quot; | xargs -I &#39;{}&#39; sh -c &quot;test -n &#39;{}&#39;&amp;amp;&amp;amp; mpc play &#39;{}&#39;&quot;  получаем текущей playlist
+mpc playlist  и выводим его с помощью dmenu(вертикально, 10 строчек)'>
+<meta property='og:url' content='https://blog.aborilov.ru/post/mpd_track/'>
 <meta property='og:site_name' content='IT Notes'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2012-12-28T10:44:16&#43;03:00'/><meta property='article:modified_time' content='2012-12-28T10:44:16&#43;03:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2014-03-06T16:00:00&#43;03:00'/><meta property='article:modified_time' content='2014-03-06T16:00:00&#43;03:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>Компиляция python кода в exe под Linux • IT Notes</title>
-  <link rel='canonical' href='https://blog.aborilov.ru/post/python2exe/'>
+  <title>Переключение трека в mpd через dmenu и mpc • IT Notes</title>
+  <link rel='canonical' href='https://blog.aborilov.ru/post/mpd_track/'>
   
   
   <link rel='icon' href='/favicon.ico'>
@@ -71,7 +69,7 @@ ga('send', 'pageview');
     <header class='header-container'>
   <div class='header entry-header'>
     <div class='header-info'>
-      <h1 class='title'>Компиляция python кода в exe под Linux</h1>
+      <h1 class='title'>Переключение трека в mpd через dmenu и mpc</h1>
       
 
     </div>
@@ -86,7 +84,7 @@ ga('send', 'pageview');
   
 </svg>
 <span class='screen-reader'>Posted on </span>
-  <time class='date' datetime='2012-12-28T10:44:16&#43;03:00'>2012, Dec 28</time>
+  <time class='date' datetime='2014-03-06T16:00:00&#43;03:00'>2014, Mar 06</time>
 </span>
 
   
@@ -111,37 +109,57 @@ One min read
     
 
     <div class='entry-content'>
-  <p>Если на linux машинах python установлен повсеместно, то windows все наоборот.
-Решил скомпилировать свое приложения в exe, причем желательно что бы это был одинокий exe файл и не тянул с собой дополнительные dll библиотеки.<br />
-Для компиляции python кода в бинарные файлы есть очень удобная программа <a href="http://www.pyinstaller.org" target="_blank">pyinstaller</a>.<br />
-Поддержку cross компиляции они уже начали добавлять, но пока она работает не полноценно, поэтому я решил установить python под wine.<br />
-Устанавливаем <a href="http://www.winehq.org" target="_blank">wine</a>.
-Качаем <a href="http://www.python.org/download/releases/" target="_blank">python</a>.<br />
-У меня, кстати, python 2.7.2 отказался устанавливать под wine, а вот 2.7.1 встал без проблем.<br />
-Для работы <code>pyinstaller</code> под windows нужен пакет <code>pywin32</code>, качаем и устанавливаем(<a href="http://sourceforge.net/projects/pywin32/" target="_blank">http://sourceforge.net/projects/pywin32/</a>.<br />
-Качаем pyinstaller(<a href="http://www.pyinstaller.org/" target="_blank">http://www.pyinstaller.org/</a>.<br />
-После того как у нас установлен python и pywin32 под wine, мы готовы.<br />
-Распаковываем pyinstaller куда-нибудь поближе к установленном python, у меня это было
-/home/pavel/.wine/drive_c/Python27/progs/pyinstaller-1.5.1<br />
-Туда же, в progs, копируем наше python приложение.<br />
-Для начала надо что pyintaller создал файл конфигурации для нашей системы</p>
+  <p>Если вы пользуетесь <code>MPD</code> и не хотите постоянно держать запущенным какой-нибудь клиент, типа <code>Sonata</code>, для переключения треков, то можно повесить на hotkey вот такой простой скрипт</p>
 
-<pre><code>wine python.exe progs/pyinstaller-1.5.1/Configure.py
+<pre><code>mpc playlist | dmenu -l 10 | xargs -I '{}' sh -c &quot;mpc playlist | grep -rne '{}' | awk -F: '{print \$1}'&quot; | xargs -I '{}' sh -c &quot;test -n '{}'&amp;amp;&amp;amp; mpc play '{}'&quot;
 </code></pre>
 
-<p>Далее создаем spec файл для нашего python приложения</p>
+<p>получаем текущей playlist</p>
 
-<pre><code>wine python.exe progs/pyinstaller-1.5.1/Makespec.py -F progs/foobar.py&lt;/blockquote&gt;
+<pre><code>mpc playlist
 </code></pre>
 
-<p>ключик <code>-F</code> как раз нужен для того чтобы на выходе у нас получился <code>stand-alone executables</code><br />
-<code>Makespec.py</code> сгенерирует файл <code>foobar.spec</code>, который нам необходим для компиляции.<br />
-И последнее что осталось сделать, это сбилдить наш бинарник.</p>
+<p>и выводим его с помощью dmenu(вертикально, 10 строчек)</p>
 
-<pre><code>wine python.exe progs/pyinstaller-1.5.1/Build.py foobar.spec
+<pre><code>dmenu -l 10
 </code></pre>
 
-<p>И в директории <code>dist</code> получаем наш <code>foobar.exe</code>.</p>
+<p>посылаем выбранный трек</p>
+
+<pre><code>xargs -I '{}' sh -c
+</code></pre>
+
+<p>фильтруем playlist по выбранному треку и выставляем номер строки данного трека</p>
+
+<pre><code>mpc playlist | grep -rne '{}'
+</code></pre>
+
+<p>оставляем только номер трека</p>
+
+<pre><code>awk -F: '{print \$1}'&quot;
+</code></pre>
+
+<p>проверяем что трек был выбран. В случае если нажали Esc, трек не надо переключать. Запускаем выбранные трек</p>
+
+<pre><code>xargs -I '{}' sh -c &quot;test -n '{}'&amp;amp;&amp;amp; mpc play '{}'&quot;
+</code></pre>
+
+<p>У меня в <code>Qtile</code> hotkey выглядит вот так:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Key(
+        [mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;m&#34;</span>,
+        lazy<span style="color:#f92672">.</span>spawn(
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            mpc playlist | dmenu -l 10  |</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            xargs -I &#39;{}&#39; sh -c &#34;mpc playlist </span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            | grep -rne &#39;{}&#39; | awk -F: &#39;{print \$1}&#39;&#34; </span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">            | xargs -I &#39;{}&#39; sh -c &#34;test -n &#39;{}&#39; &amp;amp;&amp;amp; mpc play &#39;{}&#39;&#34;
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>)
+    ),</code></pre></div>
+Переключение вперед/назад/стоп
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Home&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc toggle&#34;</span>)),
+Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;End&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc stop&#34;</span>)),
+Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Page_Down&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc next&#34;</span>)),
+Key([mod], <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Delete&#34;</span>, lazy<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;mpc prev&#34;</span>)),</code></pre></div></p>
 
 </div>
 
@@ -157,7 +175,7 @@ One min read
   
 <nav class='entry-nav-container'>
   <div class='entry-nav'><div class='prev-entry'>
-      <a href='/post/range_large_preview/'>
+      <a href='/post/python2exe/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -165,10 +183,10 @@ One min read
   
 </svg>
  Previous</span>
-        <span class='screen-reader'>Previous post: </span>Не показывать preview для больших архивов в ranger</a>
+        <span class='screen-reader'>Previous post: </span>Компиляция python кода в exe под Linux</a>
     </div><div class='next-entry'>
-      <a href='/post/mpd_track/'>
-        <span class='screen-reader'>Next post: </span>Переключение трека в mpd через dmenu и mpc<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+      <a href='/post/qtile/'>
+        <span class='screen-reader'>Next post: </span>Оконный менеджер Qtile<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
   <polyline points="14 6 20 12 14 18"/>
