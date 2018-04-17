@@ -5,10 +5,19 @@
     <link>https://blog.aborilov.ru/post/</link>
     <description>Recent content in Posts on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 25 Aug 2015 16:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Tue, 17 Apr 2018 09:29:16 +0300</lastBuildDate>
     
 	<atom:link href="https://blog.aborilov.ru/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Free VPN server on GCP in 5 minutes</title>
+      <link>https://blog.aborilov.ru/post/vpn/</link>
+      <pubDate>Tue, 17 Apr 2018 09:29:16 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/vpn/</guid>
+      <description>As you might know, there are a lot of blocked services in Russia, LinkedIn, Telegram, etc., and lately, I start to use LinkedIn more extensively. I tried to use some free VPN services, like FlyVPN, Tunnel Bear, but they all have restrictions and slow. That&amp;rsquo;s why I decided to run my own VPN server on some cloud platform. I know that you can run droplet in the digital ocean for only 5$ a month ,</description>
+    </item>
     
     <item>
       <title>Переключение между сетевыми профилями NetworkManager через dmenu</title>
@@ -114,6 +123,15 @@ mpc playlist  и выводим его с помощью dmenu(вертикал�
       <description>Я так и не смог найти нормального способа получить текущую раскладку клавиатуры из командрой строки. В интернете много разный примеров, но ни один у меня не выдал нужного результата(система Ubuntu 12.04). Единственное что дает хоть какой-то результат:
 xset -q  на выходе получаем
 Keyboard Control: auto repeat: on key click percent: 0 LED mask: 00000002 XKB indicators: 00: Caps Lock: off 01: Num Lock: on 02: Scroll Lock: off 03: Compose: off 04: Kana: off 05: Sleep: off 06: Suspend: off 07: Mute: off 08: Misc: off 09: Mail: off 10: Charging: off 11: Shift Lock: off 12: Group 2: off 13: Mouse Keys: off auto repeat delay: 500 repeat rate: 33 auto repeating keys: 00ffffffdffffbbf fadfffefffedffff 9fffffffffffffff fff7ffffffffffff bell percent: 50 bell pitch: 400 bell duration: 100 Pointer Control: acceleration: 2/1 threshold: 4 Screen Saver: prefer blanking: yes allow exposures: yes timeout: 600 cycle: 600 Colors: default colormap: 0x20 BlackPixel: 0 WhitePixel: 16777215 Font Path: /usr/share/fonts/X11/misc,/usr/share/fonts/X11/100dpi/:unscaled,/usr/share/fonts/X11/75dpi/:unscaled,/usr/share/fonts/X11/Type1,/usr/share/fonts/X11/100dpi,/usr/share/fonts/X11/75dpi,/var/lib/defoma/x-ttcidfont-conf.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.aborilov.ru/post/tiling_wm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/tiling_wm/</guid>
+      <description></description>
     </item>
     
   </channel>
