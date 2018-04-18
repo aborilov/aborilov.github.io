@@ -5,10 +5,21 @@
     <link>https://blog.aborilov.ru/post/</link>
     <description>Recent content in Posts on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 17 Apr 2018 09:29:16 +0300</lastBuildDate>
+    <lastBuildDate>Wed, 18 Apr 2018 09:00:16 +0300</lastBuildDate>
     
 	<atom:link href="https://blog.aborilov.ru/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SOCKS5 proxy server in 2 minutes</title>
+      <link>https://blog.aborilov.ru/post/proxy/</link>
+      <pubDate>Wed, 18 Apr 2018 09:00:16 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/proxy/</guid>
+      <description>In the previous post we deployed VPN server on GCP instance, now we can easily run SOCKS5 proxy server on the same instance, for this we only need to install server with command:
+sudo apt-get install dante-server and add configuration to file /etc/danted.conf
+logoutput: stderr internal: eth0 port = 7777 external: eth0 socksmethod: username user.privileged: root user.unprivileged: nobody client pass { from: 0.0.0.0/0 port 1-65535 to: 0.0.0.0/0 log: error socksmethod: username } socks pass { from: 0.</description>
+    </item>
     
     <item>
       <title>Free VPN server on GCP in 5 minutes</title>

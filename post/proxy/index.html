@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='In the previous post we deployed VPN server on GCP instance, now we can easily run SOCKS5 proxy server on the same instance, for this we only need to install server with command:
+sudo apt-get install dante-server and add configuration to file /etc/danted.conf
+logoutput: stderr internal: eth0 port = 7777 external: eth0 socksmethod: username user.privileged: root user.unprivileged: nobody client pass { from: 0.0.0.0/0 port 1-65535 to: 0.0.0.0/0 log: error socksmethod: username } socks pass { from: 0.'>
+
+<meta property='og:title' content='SOCKS5 proxy server in 2 minutes • IT Notes'>
+<meta property='og:description' content='In the previous post we deployed VPN server on GCP instance, now we can easily run SOCKS5 proxy server on the same instance, for this we only need to install server with command:
+sudo apt-get install dante-server and add configuration to file /etc/danted.conf
+logoutput: stderr internal: eth0 port = 7777 external: eth0 socksmethod: username user.privileged: root user.unprivileged: nobody client pass { from: 0.0.0.0/0 port 1-65535 to: 0.0.0.0/0 log: error socksmethod: username } socks pass { from: 0.'>
+<meta property='og:url' content='https://blog.aborilov.ru/post/proxy/'>
+<meta property='og:site_name' content='IT Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2018-04-18T09:00:16&#43;03:00'/><meta property='article:modified_time' content='2018-04-18T09:00:16&#43;03:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.37.1" />
+
+  <title>SOCKS5 proxy server in 2 minutes • IT Notes</title>
+  <link rel='canonical' href='https://blog.aborilov.ru/post/proxy/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/assets/css/main.77da63e1.css'><link rel='stylesheet' href='/css/custom.css'>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-7387908-2', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+
+<body class='page type-post'>
+  <div class='site'>
+
+    <a class='screen-reader' href='#main'>Skip to Content</a>
+
+    <header id='header' class='header-container'>
+      <div class='header site-header'>
+        <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
+  <ul class='main-menu'>
+  <li>
+      <a href='/'>Home</a>
+    </li>
+  <li>
+      <a href='https://blog.aborilov.ru/post'>Posts</a>
+    </li>
+  
+  </ul>
+</nav>
+
+        <div class='header-info'>
+          
+          <p class='site-title title'>IT Notes</p>
+          
+          <p class='site-description subtitle'>Aborilov Pavel&#39;s thoughts</p>
+        </div>
+      </div>
+    </header>
+
+
+<main id='main' class='main'>
+  <article lang='en' class='entry'>
+    <header class='header-container'>
+  <div class='header entry-header'>
+    <div class='header-info'>
+      <h1 class='title'>SOCKS5 proxy server in 2 minutes</h1>
+      
+
+    </div>
+    
+<div class='meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader'>Posted on </span>
+  <time class='date' datetime='2018-04-18T09:00:16&#43;03:00'>2018, Apr 18</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+    
+    
+
+    <div class='entry-content'>
+  <p>In the <a href="/post/vpn">previous post</a> we deployed VPN server on GCP instance, now we can easily
+run SOCKS5 proxy server on the same instance, for this we only need to install server with command:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install dante-server</code></pre></div>
+
+<p>and add configuration to file <code>/etc/danted.conf</code></p>
+
+<pre><code>logoutput: stderr
+
+internal: eth0 port = 7777
+external: eth0
+socksmethod: username
+user.privileged: root
+user.unprivileged: nobody
+
+client pass {
+       from: 0.0.0.0/0 port 1-65535 to: 0.0.0.0/0
+       log: error
+       socksmethod: username
+}
+
+
+
+socks pass {
+       from: 0.0.0.0/0 to: 0.0.0.0/0
+       command: bind connect udpassociate
+       log: error
+       socksmethod: username
+}
+
+socks pass {
+       from: 0.0.0.0/0 to: 0.0.0.0/0
+       command: bindreply udpreply
+       log: error
+}
+</code></pre>
+
+<p>as always you can change port and maybe you need to change internal and external network interface name,
+you can check it with command <code>ifconfig</code>, for my GCP instance it&rsquo;s <code>ens4</code></p>
+
+<pre><code>aborilov@instance-1:~$ ifconfig
+ens4: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1460
+        inet 10.128.0.2  netmask 255.255.255.255  broadcast 10.128.0.2
+        inet6 fe80::4001:aff:fe80:2  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 42:01:0a:80:00:02  txqueuelen 1000  (Ethernet)
+        RX packets 825689  bytes 820274156 (820.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 922109  bytes 804120538 (804.1 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 1062089  bytes 180611621 (180.6 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1062089  bytes 180611621 (180.6 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+tun0: flags=4305&lt;UP,POINTOPOINT,RUNNING,NOARP,MULTICAST&gt;  mtu 1500
+        inet 192.168.246.1  netmask 255.255.255.0  destination 192.168.246.1
+        inet6 fe80::9f6a:4697:dc3f:b9db  prefixlen 64  scopeid 0x20&lt;link&gt;
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 100  (UNSPEC)
+        RX packets 302281  bytes 37236386 (37.2 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 622091  bytes 740905694 (740.9 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre>
+
+<p>you also need to add <code>Firewall rule</code> for you proxy port as we did in the <a href="/post/vpn">previous post</a></p>
+
+<p>Now we just need to add user:</p>
+
+<pre><code>sudo useradd -m sockduser &amp;&amp; sudo passwd sockduser
+</code></pre>
+
+<p>and start the service</p>
+
+<pre><code>sudo systemctl enable danted.service
+sudo systemctl start danted.service
+</code></pre>
+
+<p>and now you can use this proxy, for example, from telegram :)</p>
+
+</div>
+
+    
+<footer class='entry-footer-container'>
+  <div class='entry-footer'>
+  
+  </div>
+</footer>
+
+
+  </article>
+  
+<nav class='entry-nav-container'>
+  <div class='entry-nav'><div class='prev-entry'>
+      <a href='/post/vpn/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader'>Previous post: </span>Free VPN server on GCP in 5 minutes</a>
+    </div></div>
+</nav>
+
+  
+<div class='comments-container'>
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-aborilov-ru" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social-menu-container'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'><li>
+        <a href='https://github.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/pavel.aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/aborilov' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:pavel@aborilov.ru' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://linkedin.com/in/pavel-aborilov-19772bb0' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Linkedin account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</div>
+        <div class='copyright'>
+  <p>
+        
+          
+        
+      
+
+       &copy; 2008-2018 Aborilov Pavel 
+  </p>
+</div>
+
+      </div>
+    </footer>
+
+  </div><script src='/assets/js/main.f29c93b9.js'></script><script src='/js/custom.js'></script></body>
+
+</html>
+
