@@ -41,7 +41,7 @@ import (
 var c upspin.Client
 
 func main() {
-	data, err := ioutil.ReadFile("/Users/aborilov/upspin/config")
+	data, err := ioutil.ReadFile("/home/user/upspin/config")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,7 +53,7 @@ func main() {
 	transports.Init(cfg)
 	c = client.New(cfg)
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -74,7 +74,7 @@ and in pieces:
 
 so, here we just read config and initialize upspin config struct
 {{< highlight go >}}
-	data, err := ioutil.ReadFile("/Users/aborilov/upspin/config")
+	data, err := ioutil.ReadFile("/home/user/upspin/config")
 	if err != nil {
 		log.Fatal(err)
 	}
