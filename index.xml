@@ -5,10 +5,21 @@
     <link>https://blog.aborilov.ru/</link>
     <description>Recent content in Home on IT Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 18 Apr 2018 09:00:16 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 26 Apr 2018 09:00:00 +0300</lastBuildDate>
     
 	<atom:link href="https://blog.aborilov.ru/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HTTP to Upspin gateway</title>
+      <link>https://blog.aborilov.ru/post/upspin_gateway/</link>
+      <pubDate>Thu, 26 Apr 2018 09:00:00 +0300</pubDate>
+      
+      <guid>https://blog.aborilov.ru/post/upspin_gateway/</guid>
+      <description>First time I heard about Upspin from this video   and I very like it idea. Who don&amp;rsquo;t know what it is about, can check the site https://upspin.io/ From the documentation:
+ Upspin provides a global name space to name all your files. Given an Upspin name, a file can be shared securely, copied efficiently without “download” and “upload”, and accessed from anywhere that has a network connection.
+ and recently I deployed upspin server on my GCP VM ok,now I have my dir/store upspin server running, need to store something there and share with someone :) https://t.</description>
+    </item>
     
     <item>
       <title>SOCKS5 proxy server in 2 minutes</title>
