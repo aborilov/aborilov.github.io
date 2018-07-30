@@ -18,9 +18,9 @@
   <link rel='canonical' href='https://blog.aborilov.ru/post/vpn/'>
   
   
-  <link rel='icon' href='/favicon.ico'>
+  <link rel='icon' href='../../favicon.ico'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
-<link rel='stylesheet' href='/assets/css/main.77da63e1.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='../../assets/css/main.77da63e1.css'><link rel='stylesheet' href='../../css/custom.css'>
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 ga('create', 'UA-7387908-2', 'auto');
@@ -41,10 +41,10 @@ ga('send', 'pageview');
         <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
   <ul class='main-menu'>
   <li>
-      <a href='/'>Home</a>
+      <a href='../../'>Home</a>
     </li>
   <li>
-      <a href='https://blog.aborilov.ru/post'>Posts</a>
+      <a href='../../post'>Posts</a>
     </li>
   
   </ul>
@@ -110,13 +110,13 @@ and lately, I start to use LinkedIn more extensively. I tried to use some free V
 but they all have restrictions and slow. That&rsquo;s why I decided to run my own VPN server on some cloud platform.
 I know that you can run droplet in the <a href="https://www.digitalocean.com/pricing/" target="_blank">digital ocean for only 5$ a month</a>
 <div class='align-center'>
-  <p><img src="/droplet.png" alt="droplet for 5$" />,</p>
+  <p><img src="../../droplet.png" alt="droplet for 5$" />,</p>
 
 </div>
 
 the same for <a href="https://www.linode.com/pricing" target="_blank">linode</a>
 <div class='align-center'>
-  <p><img src="/linode.png" alt="linode server" /></p>
+  <p><img src="../../linode.png" alt="linode server" /></p>
 
 </div>
 
@@ -128,39 +128,39 @@ I&rsquo;m using image <code>Ubuntu 17.10</code>, we don&rsquo;t need any SSD, ju
 we need to allow HTTP and HTTPS traffic, our VPN server will be available over HTTPs
 and we need HTTP for LetsEncrypt verification.
 <div class='align-center'>
-  <p><img src="/create_instance.png" alt="create new instance" /></p>
+  <p><img src="../../create_instance.png" alt="create new instance" /></p>
 
 </div>
 
 In the <code>VPC network-&gt;Firewall rules</code> we need to add port for our VPN server, I&rsquo;m using port <code>18450</code> you can use another.
 <div class='align-center'>
-  <p><img src="/firewall_rule.png" alt="add firewall rule" /></p>
+  <p><img src="../../firewall_rule.png" alt="add firewall rule" /></p>
 
 </div>
 
 Next, we need to add the tag from firewall rule to our new instance. So go to our newly created instance and press <code>Edit</code>:
 <div class='align-center'>
-  <p><img src="/add_tag.png" alt="add tag" /></p>
+  <p><img src="../../add_tag.png" alt="add tag" /></p>
 
 </div>
 
 while we editing instance setting we need also to add external static IP:
 under <code>Network interfaces</code>
 <div class='align-center'>
-  <p><img src="/network.png" alt="Network interfaces" /></p>
+  <p><img src="../../network.png" alt="Network interfaces" /></p>
 
 </div>
 
 create new static IP
 <div class='align-center'>
-  <p><img src="/static_ip.png" alt="add static IP" /></p>
+  <p><img src="../../static_ip.png" alt="add static IP" /></p>
 
 </div>
 </p>
 
 <p>If you like me and all your DNS record already in <code>Cloud DNS</code> you can add new DNS record for this IP under <code>Network services-&gt;Cloud DNS</code>:
 <div class='align-center'>
-  <p><img src="/dns.png" alt="add DNS name" /></p>
+  <p><img src="../../dns.png" alt="add DNS name" /></p>
 
 </div>
 
@@ -169,7 +169,7 @@ We will need this DNS name for LetsEncrypt verification.</p>
 <p>OK, our instance is ready, now we need to install VPN server.
 Connect to the instance through SSH web-based client:
 <div class='align-center'>
-  <p><img src="/ssh.png" alt="SSH" /></p>
+  <p><img src="../../ssh.png" alt="SSH" /></p>
 
 </div>
 </p>
@@ -191,7 +191,7 @@ sudo systemctl enable pritunl mongodb</code></pre></div>
 
 <p>That&rsquo;s all, now you can go to <a href="https://vpn.youdomains.com" target="_blank">https://vpn.youdomains.com</a>
 <div class='align-center'>
-  <p><img src="/pritunl_setup_key.png" alt="pritunl setupkey" /></p>
+  <p><img src="../../pritunl_setup_key.png" alt="pritunl setupkey" /></p>
 
 </div>
 
@@ -204,25 +204,25 @@ This should be left as it is when the MongoDB server is running on the same serv
 <p>Next, on the <code>Initial Setup</code> screen, you need to set <code>Username</code>, <code>New Password</code>,
 <code>Public Address</code> and set <code>LetsEncrypt Domain</code> to your newly created domain name.
 <div class='align-center'>
-  <p><img src="/initial_setup.png" alt="initial setup" /></p>
+  <p><img src="../../initial_setup.png" alt="initial setup" /></p>
 
 </div>
 
 Now we just need to add organization
 <div class='align-center'>
-  <p><img src="/create_org.png" alt="add organization" /></p>
+  <p><img src="../../create_org.png" alt="add organization" /></p>
 
 </div>
 
 add new user to this organization
 <div class='align-center'>
-  <p><img src="/create_user.png" alt="add user" /></p>
+  <p><img src="../../create_user.png" alt="add user" /></p>
 
 </div>
 
 add new server
 <div class='align-center'>
-  <p><img src="/add_server.png" alt="add server" /></p>
+  <p><img src="../../add_server.png" alt="add server" /></p>
 
 </div>
 
@@ -230,7 +230,7 @@ don&rsquo;t forget to set port the same as in <code>Firewall rule</code></p>
 
 <p>attach server to the organization
 <div class='align-center'>
-  <p><img src="/attach_org.png" alt="add server" /></p>
+  <p><img src="../../attach_org.png" alt="add server" /></p>
 
 </div>
 
@@ -258,7 +258,7 @@ The profile can then be imported into the <code>Pritunl</code> client or any oth
   
 <nav class='entry-nav-container'>
   <div class='entry-nav'><div class='prev-entry'>
-      <a href='/post/network_manager_dmenu/'>
+      <a href='../../post/network_manager_dmenu/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -268,7 +268,7 @@ The profile can then be imported into the <code>Pritunl</code> client or any oth
  Previous</span>
         <span class='screen-reader'>Previous post: </span>Переключение между сетевыми профилями NetworkManager через dmenu</a>
     </div><div class='next-entry'>
-      <a href='/post/proxy/'>
+      <a href='../../post/proxy/'>
         <span class='screen-reader'>Next post: </span>SOCKS5 proxy server in 2 minutes<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -368,7 +368,7 @@ The profile can then be imported into the <code>Pritunl</code> client or any oth
       </div>
     </footer>
 
-  </div><script src='/assets/js/main.f29c93b9.js'></script><script src='/js/custom.js'></script></body>
+  </div><script src='../../assets/js/main.f29c93b9.js'></script><script src='../../js/custom.js'></script></body>
 
 </html>
 

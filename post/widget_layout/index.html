@@ -22,9 +22,9 @@
   <link rel='canonical' href='https://blog.aborilov.ru/post/widget_layout/'>
   
   
-  <link rel='icon' href='/favicon.ico'>
+  <link rel='icon' href='../../favicon.ico'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
-<link rel='stylesheet' href='/assets/css/main.77da63e1.css'><link rel='stylesheet' href='/css/custom.css'>
+<link rel='stylesheet' href='../../assets/css/main.77da63e1.css'><link rel='stylesheet' href='../../css/custom.css'>
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 ga('create', 'UA-7387908-2', 'auto');
@@ -45,10 +45,10 @@ ga('send', 'pageview');
         <nav id='main-menu' class='main-menu-container' aria-label='Main Menu'>
   <ul class='main-menu'>
   <li>
-      <a href='/'>Home</a>
+      <a href='../../'>Home</a>
     </li>
   <li>
-      <a href='https://blog.aborilov.ru/post'>Posts</a>
+      <a href='../../post'>Posts</a>
     </li>
   
   </ul>
@@ -109,7 +109,7 @@ ga('send', 'pageview');
     
 
     <div class='entry-content'>
-  <p>В Qtile мне очень не хватало аплета отображающего текущую раскладку клавиатуры и поэтому я решил озадачиться этим вопросам. В <a href="/post/keyboard_layout_python/">прошлой статье</a> я описал как получить текущую раскладку клавиатуры в <code>Python</code>, теперь осталось прикрутить это к <code>qtile</code>.
+  <p>В Qtile мне очень не хватало аплета отображающего текущую раскладку клавиатуры и поэтому я решил озадачиться этим вопросам. В <a href="../../post/keyboard_layout_python/">прошлой статье</a> я описал как получить текущую раскладку клавиатуры в <code>Python</code>, теперь осталось прикрутить это к <code>qtile</code>.
 Что оказалось совсем не сложно сделать. За основу я взял виджет часов, который является TextBox&rsquo;ом. Весь Qtile у меня находить в директории</p>
 
 <pre><code>/usr/local/lib/python2.7/dist-packages/libqtile/
@@ -152,7 +152,7 @@ ga('send', 'pageview');
             self<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> now
             self<span style="color:#f92672">.</span>bar<span style="color:#f92672">.</span>draw()
         <span style="color:#66d9ef">return</span> True</code></pre></div>
-Как видно в методе update производиться присвоение значения текстового поля, в _configure прописывается обновлять виджет каждую секунду, что для нас является очень полезным. Скопируем данный класс под именем <code>kblayout.py</code>. Это и будет наш новый виджет. Так же в директорию с виджетами необходимо скопировать класс который занимется получением текущей раскладки клавиатуры из <a href="/post/keyboard_layout_python/">прошлой статьи</a> под именем <code>kb.py</code>.<br />
+Как видно в методе update производиться присвоение значения текстового поля, в _configure прописывается обновлять виджет каждую секунду, что для нас является очень полезным. Скопируем данный класс под именем <code>kblayout.py</code>. Это и будет наш новый виджет. Так же в директорию с виджетами необходимо скопировать класс который занимется получением текущей раскладки клавиатуры из <a href="../../post/keyboard_layout_python/">прошлой статьи</a> под именем <code>kb.py</code>.<br />
 После изменения <code>kblayout.py</code> получаем:
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> .. <span style="color:#f92672">import</span> hook, bar, manager
 <span style="color:#f92672">import</span> base
@@ -265,7 +265,7 @@ k <span style="color:#f92672">=</span> kb()
   
 <nav class='entry-nav-container'>
   <div class='entry-nav'><div class='prev-entry'>
-      <a href='/post/keyboard_layout_python/'>
+      <a href='../../post/keyboard_layout_python/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -275,7 +275,7 @@ k <span style="color:#f92672">=</span> kb()
  Previous</span>
         <span class='screen-reader'>Previous post: </span>Получение текущей раскладки клавиатуры в python</a>
     </div><div class='next-entry'>
-      <a href='/post/range_large_preview/'>
+      <a href='../../post/range_large_preview/'>
         <span class='screen-reader'>Next post: </span>Не показывать preview для больших архивов в ranger<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -375,7 +375,7 @@ k <span style="color:#f92672">=</span> kb()
       </div>
     </footer>
 
-  </div><script src='/assets/js/main.f29c93b9.js'></script><script src='/js/custom.js'></script></body>
+  </div><script src='../../assets/js/main.f29c93b9.js'></script><script src='../../js/custom.js'></script></body>
 
 </html>
 

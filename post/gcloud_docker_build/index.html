@@ -4,20 +4,26 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='С помощью этой команды можно подключиться к уже существующей сессии tmux или создать новую сессию с заданным именем. sh -c &#34;tmux ls -f &#39;#{session_name}&#39; | dmenu -l 7 | xargs -i{} urxvtcd -e sh -c &#39;tmux attach -t {} || tmux new -s {}&#39;&#34;
-Выполнение данной команды можно повесить на комбинацию клавишь. Для работы необходимо приложение dmenu. Терминал можно заменить на любой другой.'>
+<meta name='description' content='If you need to build docker container and want to save your laptop battery, you can easily build your container in GCP container builder.
+You will need to have gcloud on your system.
+Authorize the gcloud command-line tool to access your project:
+gcloud auth login  Configure your project for the gcloud tool, where [PROJECT_ID] is your GCP project ID that you created or selected in the previous section:
+gcloud config set project [PROJECT_ID]  and now you can build your image using GCP container builder'>
 
-<meta property='og:title' content='Выбор и создание сессий tmux • IT Notes'>
-<meta property='og:description' content='С помощью этой команды можно подключиться к уже существующей сессии tmux или создать новую сессию с заданным именем. sh -c &#34;tmux ls -f &#39;#{session_name}&#39; | dmenu -l 7 | xargs -i{} urxvtcd -e sh -c &#39;tmux attach -t {} || tmux new -s {}&#39;&#34;
-Выполнение данной команды можно повесить на комбинацию клавишь. Для работы необходимо приложение dmenu. Терминал можно заменить на любой другой.'>
-<meta property='og:url' content='https://blog.aborilov.ru/post/choose_tmux/'>
+<meta property='og:title' content='Build docker container in GCP container builder • IT Notes'>
+<meta property='og:description' content='If you need to build docker container and want to save your laptop battery, you can easily build your container in GCP container builder.
+You will need to have gcloud on your system.
+Authorize the gcloud command-line tool to access your project:
+gcloud auth login  Configure your project for the gcloud tool, where [PROJECT_ID] is your GCP project ID that you created or selected in the previous section:
+gcloud config set project [PROJECT_ID]  and now you can build your image using GCP container builder'>
+<meta property='og:url' content='https://blog.aborilov.ru/post/gcloud_docker_build/'>
 <meta property='og:site_name' content='IT Notes'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2015-06-17T14:15:00&#43;03:00'/><meta property='article:modified_time' content='2015-06-17T14:15:00&#43;03:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2018-07-30T09:00:16&#43;03:00'/><meta property='article:modified_time' content='2018-07-30T09:00:16&#43;03:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>Выбор и создание сессий tmux • IT Notes</title>
-  <link rel='canonical' href='https://blog.aborilov.ru/post/choose_tmux/'>
+  <title>Build docker container in GCP container builder • IT Notes</title>
+  <link rel='canonical' href='https://blog.aborilov.ru/post/gcloud_docker_build/'>
   
   
   <link rel='icon' href='../../favicon.ico'>
@@ -67,7 +73,7 @@ ga('send', 'pageview');
     <header class='header-container'>
   <div class='header entry-header'>
     <div class='header-info'>
-      <h1 class='title'>Выбор и создание сессий tmux</h1>
+      <h1 class='title'>Build docker container in GCP container builder</h1>
       
 
     </div>
@@ -82,7 +88,7 @@ ga('send', 'pageview');
   
 </svg>
 <span class='screen-reader'>Posted on </span>
-  <time class='date' datetime='2015-06-17T14:15:00&#43;03:00'>2015, Jun 17</time>
+  <time class='date' datetime='2018-07-30T09:00:16&#43;03:00'>2018, Jul 30</time>
 </span>
 
   
@@ -93,7 +99,7 @@ ga('send', 'pageview');
   <polyline points="12 6 12 12 15 15"/>
   
 </svg>
-One min read
+2 mins read
 </span>
 
 
@@ -107,12 +113,72 @@ One min read
     
 
     <div class='entry-content'>
-  <p>С помощью этой команды можно подключиться к уже существующей сессии tmux или создать новую сессию с заданным именем.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sh -c <span style="color:#e6db74">&#34;tmux ls -f &#39;#{session_name}&#39; | dmenu -l 7 | xargs -i{} urxvtcd -e sh -c &#39;tmux attach -t {} || tmux new -s {}&#39;&#34;</span></code></pre></div></p>
+  <p>If you need to build docker container and want to save your laptop battery, you can easily
+build your container in GCP container builder.</p>
 
-<p>Выполнение данной команды можно повесить на комбинацию клавишь.
-Для работы необходимо приложение dmenu.
-Терминал можно заменить на любой другой.</p>
+<p>You will need to have <code>gcloud</code> on your system.</p>
+
+<p>Authorize the gcloud command-line tool to access your project:</p>
+
+<pre><code>gcloud auth login
+</code></pre>
+
+<p>Configure your project for the gcloud tool, where [PROJECT_ID] is your GCP project ID that you created or selected in the previous section:</p>
+
+<pre><code>gcloud config set project [PROJECT_ID]
+</code></pre>
+
+<p>and now you can build your image using GCP container builder</p>
+
+<pre><code>gcloud builds submit --tag gcr.io/[PROJECT_ID]/quickstart-image .
+</code></pre>
+
+<p>you run this image locally you need to configure Docker to use your Container Registry credentials when interacting with Container Registry (you are only required to do this once):</p>
+
+<pre><code>gcloud auth configure-docker
+</code></pre>
+
+<p>and now you can pull your image and run</p>
+
+<pre><code>docker run gcr.io/[PROJECT_ID]/quickstart-image
+</code></pre>
+
+<p>You also can use build config file</p>
+
+<pre><code>steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/quickstart-image', '.' ]
+images:
+- 'gcr.io/$PROJECT_ID/quickstart-image'
+</code></pre>
+
+<p>and if you want to use cache to speed up your builds you can add</p>
+
+<pre><code>'--cache-from', 'gcr.io/$PROJECT_ID/quickstart-image',
+</code></pre>
+
+<p>to your config</p>
+
+<pre><code>steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '-t', 'gcr.io/$PROJECT_ID/quickstart-image',
+            '--cache-from', 'gcr.io/aborilov/senseware',
+            '.'
+        ]
+images:
+- 'gcr.io/$PROJECT_ID/quickstart-image'
+</code></pre>
+
+<p>and don&rsquo;t forget to pull newly builded image</p>
+
+<pre><code>docker pull gcr.io/[PROJECT_ID]/quickstart-image
+</code></pre>
+
+<blockquote>
+<p>use separate folder for build, because gcloud will compress it and send to cloud</p>
+</blockquote>
 
 </div>
 
@@ -128,7 +194,7 @@ One min read
   
 <nav class='entry-nav-container'>
   <div class='entry-nav'><div class='prev-entry'>
-      <a href='../../post/vim_gvim_neovim/'>
+      <a href='../../post/upspin_gateway/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -136,17 +202,7 @@ One min read
   
 </svg>
  Previous</span>
-        <span class='screen-reader'>Previous post: </span>Сравнение производительности vim, gvim и neovim</a>
-    </div><div class='next-entry'>
-      <a href='../../post/network_manager_dmenu/'>
-        <span class='screen-reader'>Next post: </span>Переключение между сетевыми профилями NetworkManager через dmenu<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
-  
-  <line x1="4" y1="12" x2="20" y2="12"/>
-  <polyline points="14 6 20 12 14 18"/>
-  
-</svg>
-</span>
-      </a>
+        <span class='screen-reader'>Previous post: </span>HTTP to Upspin gateway</a>
     </div></div>
 </nav>
 
